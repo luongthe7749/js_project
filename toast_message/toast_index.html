@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/toast_message/toast_style.css">
+</head>
+<body>
+        <div id="toast">
+            <!-- <div class="toast toast--success"> -->
+                <!-- <div class="toast__icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="toast__body">
+                    <h3 class="toast__title">Success</h3>
+                    <p class="toast__message">xin chao tat ca cac ban</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div> -->
+            <!-- </div> -->
+        </div>
+
+        <div>
+            <div onclick="showSuccessToast();" class="btn btn--success">Show success toast</div>
+            <div onclick="showErrorToast();" class="btn btn--danger">Show error toast</div>
+          </div>
+
+        <script>
+    function toast({
+        title = '',
+        message = '', 
+        type='info', 
+        duration = 3000})
+        {
+    const main = document.getElementById('toast')
+
+    if(main){
+    const toast = document.createElement('div')
+
+    const autoremoveid = setTimeout(()=>{
+        main.removeChild(toast)
+    },duration + 1000)
+
+    toast.onclick = function(e){
+        if(e.target.closest('.toast__close')){
+            main.removeChild(toast)
+            clearTimeout(autoremoveid)
+        }
+        
+    }
+    const icons = {
+        success : 'fa-solid fa-circle-check',
+        info: 'fa-solid fa-circle-info',
+        warning:'fa-solid fa-brake-warning',
+        error:'fas fa-regular fa-circle-exclamation'
+    }
+    const icon = icons[type]
+    const delay = (duration / 1000).toFixed(2)
+    toast.classList.add('toast', `toast--${type}`)
+    toast.style.animation = `slideInLeft ease .5s, fadeOut linear 1s ${delay}s forwards`
+    toast.innerHTML = ` <div class="toast__icon">
+                    <i class="${icon}"></i>
+                </div>
+                <div class="toast__body">
+                    <h3 class="toast__title">${title}</h3>
+                    <p class="toast__msg">${message}</p>
+                </div>
+                <div class="toast__close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>`
+
+    main.appendChild(toast)
+    
+}
+     }
+           
+    function showSuccessToast() {
+    toast({
+      title: "Thành công!",
+      message: "Bạn đã đăng ký thành công tài khoản tại F8.",
+      type: "success",
+      duration: 5000
+    });
+  }
+
+  function showErrorToast() {
+    toast({
+      title: "Thất bại!",
+      message: "Có lỗi xảy ra, vui lòng liên hệ quản trị viên.",
+      type: "error",
+      duration: 5000
+    });
+  }
+        </script>
+       
+
+        <!-- <div class="toast toast--info">
+            <div class="toast__icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Info</h3>
+                <p class="toast__message">xin chao tat ca cac ban</p>
+            </div>
+            <div class="toast__close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+
+        <div class="toast toast--warning">
+            <div class="toast__icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Waring</h3>
+                <p class="toast__message">xin chao tat ca cac ban</p>
+            </div>
+            <div class="toast__close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+
+        <div class="toast toast--error">
+            <div class="toast__icon">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="toast__body">
+                <h3 class="toast__title">Success</h3>
+                <p class="toast__message">xin chao tat ca cac ban</p>
+            </div>
+            <div class="toast__close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div> -->
+    
+</body>
+</html>
